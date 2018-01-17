@@ -15,9 +15,9 @@ With #ifndef guards, the compiler can safely read any file it isn't sure it has 
 
 #include <string>
 #include <map>
+
+// to make synatx unreal friendly
 #define TMap std::map
-
-
 using FString = std::string;
 using int32 = int;
 
@@ -65,11 +65,12 @@ public:
 
 
 private:
-	// instance variable
+	
+	// See Constructor for initialization
 	int32 MyCurrentTries;
-	int32 MyMaxTries;
 	FString MyHiddenWord;
 	bool bGameIsWon;
+
 	bool IsIsogram(FString Word) const;
 	bool IsLowerCase(FString word) const;
 };
