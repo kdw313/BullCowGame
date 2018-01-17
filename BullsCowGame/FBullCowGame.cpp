@@ -4,7 +4,7 @@
 * Created by DONGWON KIM on 1/12/18.
 * Copyright 2018 DONGWON KIM. All rights reserved.
 **/
-
+#pragma once
 #include "FBullCowGame.h"
 
 
@@ -14,7 +14,7 @@ FBullCowGame::FBullCowGame() { Reset(); }
 int32 FBullCowGame::GetMaxTries() const {
 	
 	// <WordLength, MaxTries>
-	TMap<int32, int32> WordLengthToMaxTries{ {3, 5}, {4, 5}, {5, 5}, {6, 5} };
+	TMap<int32, int32> WordLengthToMaxTries{ {3, 4}, {4, 5}, {5, 10}, {6, 16}, {7, 20} };
 
 	return WordLengthToMaxTries[MyHiddenWord.length()];
 }
@@ -34,7 +34,7 @@ EGuessStatus FBullCowGame::CheckGuessValidty(FString Guess) const {
 	} else if (!IsLowerCase(Guess)) { // if the guess isn't all lower case
 
 		return EGuessStatus::Not_Lowercase; // return error
-	} else if (Guess.length() != GetHiddenWordLength()) { //if the guess length is worng
+	} else if (Guess.length() != GetHiddenWordLength()) { //if the guess length is wrong
 		return EGuessStatus::Wrong_Length; // return Error
 
 	} else { // if everything is ok
@@ -46,13 +46,8 @@ EGuessStatus FBullCowGame::CheckGuessValidty(FString Guess) const {
 // public
 void FBullCowGame::Reset() {
 
-	const FString HIDDEN_WORD = "planet";
+	const FString HIDDEN_WORD = "plane"; // must be isogram for now
 
-	constexpr int32 START_TRIES = 1;
-	constexpr int32 MAX_TRIES = 8;
-
-	MyCurrentTries = START_TRIES;
-	MyMaxTries = MAX_TRIES;
 	MyHiddenWord = HIDDEN_WORD;
 	bGameIsWon = false;
 
@@ -67,7 +62,7 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess) {
 	FBullCowCount BullCowCount;
 	int32 WordLength = (int32)MyHiddenWord.length(); // assuming same length as guess
 
-													 // loop through all letters in the Hiddenword
+													 // loop through all letters in the Hidden word
 	for (int MHWChar = 0; MHWChar < WordLength; ++MHWChar) {
 		// loop through all letter in the guess
 		for (int GChar = 0; GChar < WordLength; ++GChar) {

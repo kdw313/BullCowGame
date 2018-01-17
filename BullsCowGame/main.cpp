@@ -78,20 +78,20 @@ FText GetValidGuess() { // TODO change to get valid guess
 
 		Status = BCGame.CheckGuessValidty(Guess);
 		switch (Status) {
-		case EGuessStatus::Not_Isogram:
-			std::cout << "Please enter a word without repeating letters.\n\n";
-			break;
+			case EGuessStatus::Not_Isogram:
+				std::cout << "Please enter a word without repeating letters.\n\n";
+				break;
 
-		case EGuessStatus::Wrong_Length:
-			std::cout << "Please enter a \"" << BCGame.GetHiddenWordLength() << "\" letter word.\n\n";
-			break;
+			case EGuessStatus::Wrong_Length:
+				std::cout << "Please enter a \"" << BCGame.GetHiddenWordLength() << "\" letter word.\n\n";
+				break;
 
-		case EGuessStatus::Not_Lowercase:
-			std::cout << "Please enter a word with lowercase.\n\n";
-			break;
+			case EGuessStatus::Not_Lowercase:
+				std::cout << "Please enter a word with lowercase.\n\n";
+				break;
 
-		default: // assume the guess is valid
-			break;
+			default: // assume the guess is valid
+				break;
 		}
 	} while (Status != EGuessStatus::OK); // keep looping until get valid error
 
